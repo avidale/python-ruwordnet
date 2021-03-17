@@ -1,16 +1,16 @@
 import os
 import setuptools
 
-description = "A Python wrapper for RuWordNet thesaurus."
+description = "A Python wrapper for the RuWordNet thesaurus."
 long_description = description
-if os.path.exists("README_en.md"):
-    with open("README_en.md", "r", encoding="utf-8") as fh:
+if os.path.exists("README.md"):
+    with open("README.md", "r", encoding="utf-8") as fh:
         long_description = fh.read()
 
 
 setuptools.setup(
     name="ruwordnet",
-    version="0.0.1",
+    version="0.0.2",
     author="David Dale",
     author_email="dale.david@mail.ru",
     description=description,

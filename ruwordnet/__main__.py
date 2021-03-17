@@ -3,7 +3,7 @@ import os
 import urllib.request
 
 
-URL = 'https://github.com/avidale/python-ruwordnet/releases/download/0.0.0/ruwordnet.db'
+URL = 'https://github.com/avidale/python-ruwordnet/releases/download/0.0.2/ruwordnet.db'
 
 
 def main():
