@@ -1,2 +1,2 @@
-from . import synsets, ruwordnet
+from . import models, ruwordnet
 from .ruwordnet import RuWordNet
