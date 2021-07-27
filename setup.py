@@ -10,7 +10,7 @@ if os.path.exists("README.md"):
 
 setuptools.setup(
     name="ruwordnet",
-    version="0.0.2",
+    version="0.0.3",
     author="David Dale",
     author_email="dale.david@mail.ru",
     description=description,

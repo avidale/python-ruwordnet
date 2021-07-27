@@ -23,7 +23,7 @@ class RuWordNet:
         """ List of all available senses """
         return self.session.query(Sense).all()
 
-    def __getitem__(self, item) -> Union[Synset, Sense, List[Sense]]:
+    def __getitem__(self, item: str) -> Union[Synset, Sense, List[Sense]]:
         """ Retrieve sense or synset by its id """
         synset = self.session.query(Synset).filter_by(id=item).first()
         if synset:
@@ -37,11 +37,11 @@ class RuWordNet:
             return senses
         raise KeyError()
 
-    def get_senses(self, lemma) -> List[Sense]:
+    def get_senses(self, lemma: str) -> List[Sense]:
         """ Retrieve a list of senses by a given lemma """
         q = lemma.upper().strip()
         return self.session.query(Sense).filter_by(lemma=q).all()
 
-    def get_synsets(self, lemma) -> List[Synset]:
+    def get_synsets(self, lemma: str) -> List[Synset]:
         """ Retrieve a list of synsets by a given lemma """
         return [sense.synset for sense in self.get_senses(lemma) if sense.synset]
