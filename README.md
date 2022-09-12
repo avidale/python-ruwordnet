@@ -6,6 +6,11 @@ This is a Python wrapper for the [RuWordNet](https://ruwordnet.ru/en) thesaurus.
 В настоящий момент поддержана версия начала 2020 года: 49713 синсетов 
 (смысловых групп), 130417 значений слов и словосочетаний. 
 
+Аналогичные и связанные проекты: 
+- https://www.nltk.org/howto/wordnet.html (оригинальный английский Wordnet)
+- https://github.com/jamsic/ru-wordnet (русский тезаурус, выкачанный из wiktionary)
+- https://nlpub.ru/Russian_Distributional_Thesaurus#Гиперонимы (русский тезаурус, собранный автоматическими эвристиками в большом корпусе)
+
 ## Что это такое
 RuWordNet --- это один из немногих тезаурусов для русского языка.
 
