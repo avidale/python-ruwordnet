@@ -27,8 +27,8 @@ setuptools.setup(
     ],
     install_requires=['sqlalchemy'],
     entry_points={
-            "console_scripts": [
-                "ruwordnet=ruwordnet.__main__:main",
+        "console_scripts": [
+            "ruwordnet=ruwordnet.__main__:main",
         ]
     }
 )

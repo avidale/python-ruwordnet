@@ -118,7 +118,8 @@ def load_from_xml(root='.', parts='NVA', file_name='ruwordnet/static/ruwordnet.d
             # child = session.query(Synset).filter_by(id=child_id).first()
             rel2values[relation['@name']].add((parent_id, child_id))
 
-            # ['hypernym', 'related', 'POS-synonymy', 'hyponym', 'domain', 'part holonym', 'instance hypernym', 'instance hyponym', 'part meronym', 'antonym'])
+            # ['hypernym', 'related', 'POS-synonymy', 'hyponym', 'domain', 'part holonym', 'instance hypernym',
+            #   'instance hyponym', 'part meronym', 'antonym'])
             # ['hypernym', 'entailment', 'domain', 'POS-synonymy', 'hyponym', 'cause', 'antonym']
             # ['POS-synonymy', 'domain', 'hypernym', 'hyponym', 'antonym']
             # uncovered: related, hyponym, instance hyponym, part meronym
@@ -218,7 +219,9 @@ def load_from_xml(root='.', parts='NVA', file_name='ruwordnet/static/ruwordnet.d
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert RuWordNet from xml to sqlite')
-    parser.add_argument('-s', '--source', default='data/rwn-2021', help='name of the directory with the source xml files')
+    parser.add_argument(
+        '-s', '--source', default='data/rwn-2021', help='name of the directory with the source xml files'
+    )
     parser.add_argument('-d', '--destination', default='ruwordnet/static/ruwordnet-2021.db',
                         help='destination database filename')
     args = parser.parse_args()
