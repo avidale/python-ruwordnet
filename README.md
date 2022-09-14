@@ -3,8 +3,8 @@ This is a Python wrapper for the [RuWordNet](https://ruwordnet.ru/en) thesaurus.
 
 Это питонячья обёртка для тезауруса [RuWordNet](https://ruwordnet.ru/ru).
 
-В настоящий момент поддержана версия начала 2020 года: 49713 синсетов 
-(смысловых групп), 130417 значений слов и словосочетаний. 
+В настоящий момент поддержана версия начала 2021 года (RuWordNet 2.0): 59905 синсетов 
+(смысловых групп), 154111 значений слов и словосочетаний. 
 
 Аналогичные и связанные проекты: 
 - https://www.nltk.org/howto/wordnet.html (оригинальный английский Wordnet)
@@ -63,6 +63,15 @@ pip install ruwordnet
 ruwordnet download
 ```
 
+В настоящий момент существует несколько версий тезауруса:
+* версия 2020 года содержится в файле `ruwordnet/static/ruwordnet.db`, 
+    и доступна по умолчанию в версии пакета `ruwordnet==0.0.2`.
+* версия 2021 года (RuWordNet 2.0) содержится в файле `ruwordnet/static/ruwordnet-2021.db`, 
+    и доступна по умолчанию начиная с версии пакета `ruwordnet>=0.0.4`.
+    В этой версии увеличился размер словаря и добавились свойства 
+    `related` (произвольная связь с другим синсетом) 
+    и `ili` (interlingual index, т.е. связь с английским WordNet) у синсетов.
+
 Для применения пакета нужно создать объект `RuWordNet`:
 ```python
 from ruwordnet import RuWordNet
@@ -73,7 +82,7 @@ wn = RuWordNet()
 указать путь до файла либо передать в конструктор открытую сессию SQLAlchemy:
 ```python
 from ruwordnet import RuWordNet
-wn = RuWordNet(filename_or_session='ruwordnet/static/ruwordnet.db')
+wn = RuWordNet(filename_or_session='ruwordnet/static/ruwordnet-2021.db')
 ```
 
 После этого можно, например, искать синсеты, в которые входит слово

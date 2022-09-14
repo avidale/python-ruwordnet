@@ -5,7 +5,7 @@ import urllib.request
 
 URLS = {
     '2020': 'https://github.com/avidale/python-ruwordnet/releases/download/0.0.2/ruwordnet.db',
-    '2021': 'https://github.com/avidale/python-ruwordnet/releases/download/0.0.3/ruwordnet-2021.db',
+    '2021': 'https://github.com/avidale/python-ruwordnet/releases/download/0.0.4/ruwordnet-2021.db',
 }
 
 
