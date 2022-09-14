@@ -141,6 +141,22 @@ antonymy_table = Table(
 )
 
 
+related_table = Table(
+    'related_relation',
+    Base.metadata,
+    Column('left_id', String(), ForeignKey("synset.id"), primary_key=True),
+    Column('right_id', String(), ForeignKey("synset.id"), primary_key=True)
+)
+
+
+ili_table = Table(
+    'interlingual_index_relation',
+    Base.metadata,
+    Column('ruwn_id', String(), ForeignKey("synset.id"), primary_key=True),
+    Column('wn_id', String(), ForeignKey("wn_synset.id"), primary_key=True)
+)
+
+
 class Synset(Base):
     __tablename__ = 'synset'
     metadata = Base.metadata
@@ -272,5 +288,55 @@ class Synset(Base):
         secondaryjoin=id == antonymy_table.c.right_id,
     )
 
+    related: List['Synset'] = relationship(
+        "Synset",
+        secondary=related_table,
+        back_populates='related_reverse',
+        primaryjoin=id == related_table.c.right_id,
+        secondaryjoin=id == related_table.c.left_id,
+    )
+    related_reverse: List['Synset'] = relationship(
+        "Synset",
+        secondary=related_table,
+        back_populates='related',
+        primaryjoin=id == related_table.c.left_id,
+        secondaryjoin=id == related_table.c.right_id,
+    )
+
+    ili: List['WNSynset'] = relationship(
+        "WNSynset",
+        secondary=ili_table,
+        back_populates='ili',
+    )
+
     def __repr__(self):
         return 'Synset(id="{}", title="{}")'.format(self.id, self.title)
+
+
+class WNSense(Base):
+    __tablename__ = 'wn_sense'
+    metadata = Base.metadata
+    key: str = Column(String(), primary_key=True, index=True)
+    name: str = Column(String(), index=True)
+    synset_id: str = Column(String(), ForeignKey('wn_synset.id'))
+    synset: 'WNSynset' = relationship("WNSynset", back_populates="senses")
+
+    def __repr__(self):
+        return 'WNSense(key="{}", name="{}")'.format(self.key, self.name)
+
+
+class WNSynset(Base):
+    __tablename__ = 'wn_synset'
+    metadata = Base.metadata
+    id: str = Column(String(), primary_key=True, index=True)
+    definition: str = Column(String())
+    senses: List[WNSense] = relationship("WNSense", order_by=WNSense.key, back_populates="synset")
+
+    ili: List[Synset] = relationship(
+        "Synset",
+        secondary=ili_table,
+        back_populates='ili',
+    )
+
+    def __repr__(self):
+        return 'WNSynset(id="{}", definition="{}")'.format(self.id, self.definition)

@@ -10,7 +10,7 @@ if os.path.exists("README.md"):
 
 setuptools.setup(
     name="ruwordnet",
-    version="0.0.3",
+    version="0.0.4",
     author="David Dale",
     author_email="dale.david@mail.ru",
     description=description,
@@ -27,8 +27,8 @@ setuptools.setup(
     ],
     install_requires=['sqlalchemy'],
     entry_points={
-            "console_scripts": [
-                "ruwordnet=ruwordnet.__main__:main",
+        "console_scripts": [
+            "ruwordnet=ruwordnet.__main__:main",
         ]
     }
 )

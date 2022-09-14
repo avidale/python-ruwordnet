@@ -8,11 +8,10 @@ from .models import Base
 
 def get_default_session(filename=None):
     if filename is None:
-        filename = os.path.join(
-            os.path.dirname(__file__),
-            'static',
-            'ruwordnet.db'
-        )
+        dir = os.path.join(os.path.dirname(__file__), 'static')
+        filename = os.path.join(dir, 'ruwordnet-2021.db')
+        if not os.path.exists(filename):
+            filename = os.path.join(dir, 'ruwordnet.db')
     if not os.path.exists(filename):
         raise FileNotFoundError(
             f'The file {filename} was not found. '
