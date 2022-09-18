@@ -112,4 +112,34 @@ vegetables.hyponyms
 # ...
 ```
 
+## Поиск в тезаурусе
+Обращаясь к объекту `RuWordNet` с помощью квадратных скобок, можно извлекать русские и английские 
+синсеты (по id) и смыслу (по id или тексту). 
+```Python
+wn['134045-N']
+# Synset(id="134045-N", title="ПОТЕНЦИАЛ (ФИЗИЧЕСКАЯ ВЕЛИЧИНА)")
+wn['11493827-n']
+# WNSynset(id="11493827-n", definition="the difference in electrical charge between two points in a circuit expressed in volts")
+wn['134045-N-189287']
+# Sense(id="134045-N-189287", name="ПОТЕНЦИАЛ")
+wn['electric_potential%1:19:00::']
+# WNSense(key="electric_potential%1:19:00::", name="electric_potential")
+wn['потенциал']
+# [Sense(id="134045-N-189287", name="ПОТЕНЦИАЛ"), Sense(id="134046-N-189287", name="ПОТЕНЦИАЛ")]
+wn['potential']
+# [WNSense(key="potential%1:19:00::", name="potential"), WNSense(key="potential%3:00:00::", name="potential"), WNSense(key="potential%1:26:00::", name="potential")]
+```
+
+Кроме этого, есть специальные методы для поиска русских или английских синсетов и значений.
+```Python
+wn.get_synset_by_id("134045-N")
+wn.get_en_synset_by_id("11493827-n")
+wn.get_senses('потенциал')
+wn.get_synsets('потенциал')
+wn.get_en_senses('potential')
+wn.get_en_synsets('potential')
+```
+
+**Предупреждение**: для английского WordNet представлены не все элементы, а только связанные с RuWordNet.
+
 Больше примеров использования есть в .ipynb файлах в данном репозитории.
