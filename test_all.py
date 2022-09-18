@@ -1,4 +1,7 @@
+import pytest
+
 from ruwordnet import RuWordNet
+from ruwordnet.models import Synset, WNSynset, Sense, WNSense
 
 
 def test_thesaurus():
@@ -27,3 +30,36 @@ def test_new_thesaurus():
     geo_science = wn["1702-N"]
     assert geo_science in ru_city.domains
     assert ru_city in geo_science.domain_items
+
+
+def test_indexing():
+    wn = RuWordNet()
+    # test lookup synsets by id
+    potential_ru = wn.get_synset_by_id("134045-N")
+    assert isinstance(potential_ru, Synset)
+    potential_en = wn.get_en_synset_by_id("11493827-n")
+    assert isinstance(potential_en, WNSynset)
+    assert potential_en in potential_ru.ili
+    assert potential_ru in potential_en.ili
+
+    # test sense lookup (ru)
+    ru_potential_senses = wn.get_senses('потенциал')
+    assert len(ru_potential_senses) >= 1
+    assert any(potential_ru == sense.synset for sense in ru_potential_senses)
+    assert potential_ru in wn.get_synsets('потенциал')
+
+    # test sense lookup (en)
+    en_potential_senses = wn.get_en_senses('potential')
+    assert len(en_potential_senses) >= 1
+    assert any(potential_en == sense.synset for sense in en_potential_senses)
+    assert potential_en in wn.get_en_synsets('potential')
+
+    # test arbitrary lookup
+    with pytest.raises(KeyError):
+        _ = wn['нет такого']
+    assert isinstance(wn['134045-N'], Synset)
+    assert isinstance(wn['11493827-n'], WNSynset)
+    assert isinstance(wn['134045-N-189287'], Sense)
+    assert isinstance(wn['electric_potential%1:19:00::'], WNSense)
+    assert isinstance(wn['потенциал'][0], Sense)
+    assert isinstance(wn['potential'][0], WNSense)
