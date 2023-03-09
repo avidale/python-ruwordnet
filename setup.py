@@ -25,7 +25,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=['sqlalchemy'],
+    install_requires=['sqlalchemy<2.0'],
     entry_points={
         "console_scripts": [
             "ruwordnet=ruwordnet.__main__:main",
